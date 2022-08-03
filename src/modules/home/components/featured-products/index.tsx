@@ -5,6 +5,7 @@ import SkeletonProductPreview from "@modules/skeletons/components/skeleton-produ
 
 const FeaturedProducts = () => {
   const { data } = useFeaturedProductsQuery()
+  console.log("featuredPro", data)
 
   return (
     <div className="py-12">
