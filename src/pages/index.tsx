@@ -5,10 +5,13 @@ import Layout from "@modules/layout/templates"
 import StickyCart from "@modules/cart/templates/theme/StickyCart"
 import { ReactElement } from "react"
 import { NextPageWithLayout } from "types/global"
+import ProductCard from "@modules/products/templates/theme/ProductCard"
 // import NavBarTop from "../modules/layout/templates/nav/navbarTop"
-
+import { useFeaturedProductsQuery } from "@lib/hooks/use-layout-data"
 
 const Home: NextPageWithLayout = () => {
+  const { data } = useFeaturedProductsQuery()
+  console.log("products", data)
   return (
     <>
       <Head
@@ -17,7 +20,18 @@ const Home: NextPageWithLayout = () => {
       />
       <StickyCart />
       <Hero />
-      <FeaturedProducts />
+      {/* <FeaturedProducts /> */}
+      <div className="flex">
+        <div className="w-full">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-3 lg:gap-3">
+            {/* <FeaturedProducts /> */}
+            {data &&
+              data.map((productDetails) => (
+                <ProductCard key={productDetails.id} product={productDetails} />
+              ))}
+          </div>
+        </div>
+      </div>
     </>
   )
 }
