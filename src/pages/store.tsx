@@ -11,7 +11,7 @@ import { useCart } from "medusa-react"
 import usePreviews from "@lib/hooks/use-previews"
 import ProductCard from "@modules/products/templates/theme/ProductCard"
 
-const Store: NextPageWithLayout = () => {
+const Store = () => {
   const [params, setParams] = useState<StoreGetProductsParams>({})
   const { cart } = useCart()
 
@@ -45,7 +45,7 @@ const Store: NextPageWithLayout = () => {
     <>
       <Head title="Store" description="Explore all of our products." />
       <div className="flex flex-col small:flex-row small:items-start py-6">
-        {/* <RefinementList refinementList={params} setRefinementList={setParams} /> */}
+        <RefinementList refinementList={params} setRefinementList={setParams} />
         {/* <InfiniteProducts params={params} /> */}
         <div className="flex">
           <div className="w-full">

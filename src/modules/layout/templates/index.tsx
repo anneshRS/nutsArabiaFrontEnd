@@ -9,9 +9,7 @@ import MobileFooter from "@modules/layout/templates/footer/MobileFooter"
 import FeatureCard from "@modules/common/components/theme/feature-card/FeatureCard"
 import { ToastContainer } from "react-toastify"
 
-
 const Layout: React.FC = ({ children }) => {
-  
   return (
     // <div>
     //   <Nav />

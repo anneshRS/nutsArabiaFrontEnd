@@ -15,6 +15,7 @@ import {
   HiOutlineUserGroup,
 } from "react-icons/hi"
 import { IoBagCheckOutline } from "react-icons/io5"
+import Category from "@modules/common/components/category/Category"
 
 const NavbarPromo = () => {
   const pages = [
@@ -99,7 +100,7 @@ const NavbarPromo = () => {
                       >
                         <Popover.Panel className="absolute z-10 -ml-1 mt-1 transform w-screen max-w-xs c-h-65vh bg-white">
                           <div className="rounded-md shadow-lg ring-1 ring-black ring-opacity-5 overflow-y-scroll flex-grow scrollbar-hide w-full h-full">
-                            {/* <Category /> */}
+                            <Category />
                           </div>
                         </Popover.Panel>
                       </Transition>
