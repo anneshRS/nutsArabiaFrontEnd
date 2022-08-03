@@ -43,7 +43,6 @@ const RefinementList = ({
 
     return
   }
-
   return (
     <div>
       <div className="px-8 py-4  small:pr-0 small:pl-8 small:min-w-[250px]">
