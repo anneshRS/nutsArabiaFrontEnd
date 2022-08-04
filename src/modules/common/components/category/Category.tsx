@@ -14,10 +14,10 @@ import Loading from "../preloader/Loading"
 import CategoryCard from "./CategoryCard"
 
 const Category = () => {
-  //   const { categoryDrawerOpen, closeCategoryDrawer } = useContext(SidebarContext)
-  //   const { data, loading, error } = useAsync(() =>
-  //     CategoryServices.getShowingCategory()
-  //   )
+  const { categoryDrawerOpen, closeCategoryDrawer } = useContext(SidebarContext)
+  // const { data, loading, error } = useAsync(() =>
+  //   CategoryServices.getShowingCategory()
+  // )
 
   const [params, setParams] = useState<StoreGetProductsParams>({})
   const { cart } = useCart()
@@ -50,34 +50,30 @@ const Category = () => {
 
   return (
     <div className="flex flex-col w-full h-full bg-white cursor-pointer scrollbar-hide">
-      {
-        /* categoryDrawerOpen */ false && (
-          <div className="w-full flex justify-between items-center h-16 px-6 py-4 bg-emerald-500 text-white border-b border-gray-100">
-            <h2 className="font-semibold font-serif text-lg m-0 text-heading flex align-center">
-              <Link href="/">
-                <a className="mr-10">
-                  <Image width={100} height={38} src="" alt="logo" />
-                </a>
-              </Link>
-            </h2>
-            <button
-              //   onClick={closeCategoryDrawer}
-              className="flex text-xl items-center justify-center w-8 h-8 rounded-full bg-gray-50 text-red-500 p-2 focus:outline-none transition-opacity hover:text-red-600"
-              aria-label="close"
-            >
-              <IoClose />
-            </button>
-          </div>
-        )
-      }
+      {categoryDrawerOpen && (
+        <div className="w-full flex justify-between items-center h-16 px-6 py-4 bg-emerald-500 text-white border-b border-gray-100">
+          <h2 className="font-semibold font-serif text-lg m-0 text-heading flex align-center">
+            <Link href="/">
+              <a className="mr-10">
+                <Image width={100} height={38} src="" alt="logo" />
+              </a>
+            </Link>
+          </h2>
+          <button
+            onClick={closeCategoryDrawer}
+            className="flex text-xl items-center justify-center w-8 h-8 rounded-full bg-gray-50 text-red-500 p-2 focus:outline-none transition-opacity hover:text-red-600"
+            aria-label="close"
+          >
+            <IoClose />
+          </button>
+        </div>
+      )}
       <div className="overflow-y-scroll scrollbar-hide w-full max-h-full">
-        {
-          /* categoryDrawerOpen */ false && (
-            <h2 className="font-semibold font-serif text-lg m-0 text-heading flex align-center border-b px-8 py-3">
-              All Categories
-            </h2>
-          )
-        }
+        {categoryDrawerOpen && (
+          <h2 className="font-semibold font-serif text-lg m-0 text-heading flex align-center border-b px-8 py-3">
+            All Categories
+          </h2>
+        )}
         {/* {error ? (
           <p className="flex justify-center align-middle items-center m-auto text-xl text-red-500">
             <span> {error}</span>
@@ -91,7 +87,7 @@ const Category = () => {
               key={category.id}
               title={category.title}
               icon={category.thumbnail}
-              nested={/* category.children */ []}
+              nested={/* category.children */ ["fill this later"]}
             />
           ))}
         </div>

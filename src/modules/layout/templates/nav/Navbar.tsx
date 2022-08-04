@@ -1,33 +1,36 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import dynamic from "next/dynamic"
-import { useRouter } from 'next/router';
-import { IoSearchOutline } from 'react-icons/io5';
-import { FiShoppingCart, FiUser, FiBell } from 'react-icons/fi';
-import NavbarPromo from './NavbarPromo';
+import { useRouter } from "next/router"
+import { IoSearchOutline } from "react-icons/io5"
+import { FiShoppingCart, FiUser, FiBell } from "react-icons/fi"
+import NavbarPromo from "./NavbarPromo"
+import { SidebarContext } from "@modules/common/components/context/SidebarContext"
+import CartDrawer from "@modules/layout/components/drawer/CartDrawer"
 
 const Navbar = () => {
-    const [imageUrl, setImageUrl] = useState('');
-    const [searchText, setSearchText] = useState('');
-    const [modalOpen, setModalOpen] = useState(false);
-    // const { toggleCartDrawer } = useContext(SidebarContext);
-    // const { totalItems } = useCart();
-    const router = useRouter();
+  const [imageUrl, setImageUrl] = useState("")
+  const [searchText, setSearchText] = useState("")
+  const [modalOpen, setModalOpen] = useState(false)
+  const { toggleCartDrawer } = useContext(SidebarContext)
+  // const { totalItems } = useCart();
+  const router = useRouter()
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     if (searchText) {
-    //       router.push(`/search?query=${searchText}`, null, { scroll: false });
-    //       setSearchText('');
-    //     } else {
-    //       router.push(`/ `, null, { scroll: false });
-    //       setSearchText('');
-    //     }
-    //   };
+  // const handleSubmit = (e) => {
+  //     e.preventDefault();
+  //     if (searchText) {
+  //       router.push(`/search?query=${searchText}`, null, { scroll: false });
+  //       setSearchText('');
+  //     } else {
+  //       router.push(`/ `, null, { scroll: false });
+  //       setSearchText('');
+  //     }
+  //   };
 
   return (
     <>
+      <CartDrawer />
       <div className="bg-emerald-500 sticky top-0 z-20">
         <div className="max-w-screen-2xl mx-auto px-3 sm:px-10">
           <div className="top-bar h-16 lg:h-auto flex items-center justify-between py-4 mx-auto">
@@ -45,7 +48,7 @@ const Navbar = () => {
               <div className="w-full flex flex-col justify-center flex-shrink-0 relative z-30">
                 <div className="flex flex-col mx-auto w-full">
                   <form
-                    // onSubmit={handleSubmit}  
+                    // onSubmit={handleSubmit}
                     className="relative pr-12 md:pr-14 bg-white overflow-hidden shadow-sm rounded-md w-full"
                   >
                     <label className="flex items-center py-0.5">
@@ -76,11 +79,11 @@ const Navbar = () => {
               </button>
               <button
                 aria-label="Total"
-                // onClick={toggleCartDrawer}
+                onClick={toggleCartDrawer}
                 className="relative px-5 text-white text-2xl font-bold"
               >
                 <span className="absolute z-10 top-0 right-0 inline-flex items-center justify-center p-1 h-5 w-5 text-xs font-medium leading-none text-red-100 transform -translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full">
-                  {/* totalItems */"0"}
+                  {/* totalItems */ "2"}
                 </span>
                 <FiShoppingCart className="w-6 h-6 drop-shadow-xl" />
               </button>
@@ -109,9 +112,9 @@ const Navbar = () => {
                     </a>
                   </Link>
                 ) : ( */}
-                  <span onClick={() => setModalOpen(!modalOpen)}>
-                    <FiUser className="w-6 h-6 drop-shadow-xl" />
-                  </span>
+                <span onClick={() => setModalOpen(!modalOpen)}>
+                  <FiUser className="w-6 h-6 drop-shadow-xl" />
+                </span>
                 {/* )} */}
               </button>
             </div>

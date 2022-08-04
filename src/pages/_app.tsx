@@ -6,8 +6,9 @@ import { StoreProvider } from "@lib/context/store-context"
 import { CartProvider, MedusaProvider } from "medusa-react"
 import { Hydrate } from "react-query"
 // import "styles/globals.css"
-import '@styles/custom.css';
+import "@styles/custom.css"
 import { AppPropsWithLayout } from "types/global"
+import { SidebarProvider } from "@modules/common/components/context/SidebarContext"
 
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
@@ -20,17 +21,19 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
       }}
     >
       <Hydrate state={pageProps.dehydratedState}>
-        <CartDropdownProvider>
-          <MobileMenuProvider>
-            <CartProvider>
-              <StoreProvider>
-                <AccountProvider>
-                  {getLayout(<Component {...pageProps} />)}
-                </AccountProvider>
-              </StoreProvider>
-            </CartProvider>
-          </MobileMenuProvider>
-        </CartDropdownProvider>
+        <SidebarProvider>
+          <CartDropdownProvider>
+            <MobileMenuProvider>
+              <CartProvider>
+                <StoreProvider>
+                  <AccountProvider>
+                    {getLayout(<Component {...pageProps} />)}
+                  </AccountProvider>
+                </StoreProvider>
+              </CartProvider>
+            </MobileMenuProvider>
+          </CartDropdownProvider>
+        </SidebarProvider>
       </Hydrate>
     </MedusaProvider>
   )
