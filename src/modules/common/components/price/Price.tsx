@@ -2,7 +2,7 @@ import React from "react"
 
 export interface IPriceProps {
   product: any
-  card: any
+  card?: any
 }
 
 const Price: React.FC<IPriceProps> = ({ product, card }) => {

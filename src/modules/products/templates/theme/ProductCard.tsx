@@ -1,3 +1,4 @@
+import ProductModal from "@modules/common/components/modal/ProductModal"
 import Price from "@modules/common/components/price/Price"
 import Image from "next/image"
 import React, { useState } from "react"
@@ -16,6 +17,11 @@ const ProductCard: React.FC<IProductCardProps> = ({
   console.log("data", product)
   return (
     <>
+      <ProductModal
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        product={product}
+      />
       <div className="group box-border overflow-hidden flex rounded-md shadow-sm pe-0 flex-col items-center bg-white relative">
         <div
           onClick={() => setModalOpen(!modalOpen)}
