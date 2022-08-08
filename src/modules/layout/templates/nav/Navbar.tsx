@@ -16,8 +16,8 @@ const Navbar = () => {
   const [searchText, setSearchText] = useState("")
   const [modalOpen, setModalOpen] = useState(false)
   const { toggleCartDrawer } = useContext(SidebarContext)
-  // const { totalItems } = useCart();
-  const { cart, totalItems } = useCart()
+  const { totalItems } = useCart()
+  // const { cart, totalItems } = useCart()
   const router = useRouter()
 
   // const handleSubmit = (e) => {
