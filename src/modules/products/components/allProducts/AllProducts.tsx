@@ -1,19 +1,9 @@
 import Price from "@modules/common/components/price/Price"
 import Image from "next/image"
 import React, { useState } from "react"
-import { IoBagAddSharp, IoAdd, IoRemove } from "react-icons/io5"
 
-export interface IProductCardProps {
-  product: any
-}
-
-const ProductCard: React.FC<IProductCardProps> = ({
-  product,
-}: IProductCardProps) => {
-  
+const AllProducts = () => {
   const [modalOpen, setModalOpen] = useState(false)
-
-  console.log("data", product)
   return (
     <>
       <div className="group box-border overflow-hidden flex rounded-md shadow-sm pe-0 flex-col items-center bg-white relative">
@@ -31,10 +21,10 @@ const ProductCard: React.FC<IProductCardProps> = ({
           {/* <Discount product={product} /> */}
 
           <Image
-            src={product.thumbnail}
+            src={/* product.thumbnail */ ""}
             width={160}
             height={160}
-            alt={product.title}
+            alt={/* product.title */ ""}
             className="object-cover transition duration-150 ease-linear transform group-hover:scale-105"
           />
         </div>
@@ -44,11 +34,11 @@ const ProductCard: React.FC<IProductCardProps> = ({
               {/* product.unit */ "each"}
             </span>
             <h2 className="text-heading truncate mb-0 block text-sm font-medium text-gray-600">
-              <span className="line-clamp-2">{product.title}</span>
+              <span className="line-clamp-2">{/* product.title */ "hey"}</span>
             </h2>
           </div>
           <div className="flex justify-between items-center text-heading text-sm sm:text-base space-s-2 md:text-base lg:text-xl">
-            <Price product={product} card={true} />
+            <Price product={/* product */} card={true} />
             <button
               //   onClick={() => handleAddItem(product)}
               disabled={/* product.quantity */ 12 < 1}
@@ -66,4 +56,4 @@ const ProductCard: React.FC<IProductCardProps> = ({
   )
 }
 
-export default ProductCard
+export default AllProducts
