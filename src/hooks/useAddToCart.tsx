@@ -1,4 +1,5 @@
 import { useStore } from "@lib/context/store-context"
+import { useCart } from "medusa-react"
 
 import React, {
   createContext,
@@ -28,10 +29,10 @@ interface ProductContext {
 const ProductActionContext = createContext<ProductContext | null>(null)
 
 const useAddToCart = () => {
-  const { addItem } = useStore()
+  // const { addItem } = useStore()
   const [item, setItem] = useState(1)
   const [products, setProducts] = useState([])
-  // const { addItem, items, updateItemQuantity } = useCart();
+  const { addItem, items, updateItemQuantity } = useCart()
 
   // useEffect(() => {
   //   const products = sessionStorage.getItem('products');
@@ -39,46 +40,46 @@ const useAddToCart = () => {
   // }, []);
 
   const handleAddItem = (product: any) => {
-    const { variants } = product
+    // const { variants } = product
     console.log("hi")
     // console.log(variants)
-    const addToCart = () => {
-      if (variant) {
-        addItem({
-          variantId: variant.id,
-          quantity,
-        })
-      }
+    // const addToCart = () => {
+    //   if (variant) {
+    //     addItem({
+    //       variantId: variant.id,
+    //       quantity,
+    //     })
+    //   }
 
-      //   const result = items.find((i) => i.id === product._id)
-      //   if (result !== undefined) {
-      //     if (result?.quantity < product?.quantity) {
-      //       const newItem = {
-      //         ...product,
-      //         id: product._id,
-      //       }
-      //       addItem(newItem, item)
-      //       notifySuccess(`${item} ${product.title} added to cart!`)
-      //     } else {
-      //       notifyError("No more quantity available for this product!")
-      //     }
-      //   } else {
-      //     const newItem = {
-      //       ...product,
-      //       id: product._id,
-      //     }
-      //     addItem(newItem, item)
-      //     notifySuccess(`${item} ${product.title} added to cart!`)
-      //   }
-      // }
-      // const handleIncreaseQuantity = (item) => {
-      //   const result = products?.find((p) => p._id === item.id)
-      //   if (result) {
-      //     if (item?.quantity < result?.quantity) {
-      //       updateItemQuantity(item.id, item.quantity + 1)
-      //     } else {
-      //       notifyError("No more quantity available for this product!")
-      //     }
+    const result = items.find((i) => i.id === product._id)
+    if (result !== undefined) {
+      if (result?.quantity < product?.quantity) {
+        const newItem = {
+          ...product,
+          id: product._id,
+        }
+        addItem(newItem, item)
+        notifySuccess(`${item} ${product.title} added to cart!`)
+      } else {
+        notifyError("No more quantity available for this product!")
+      }
+    } else {
+      const newItem = {
+        ...product,
+        id: product._id,
+      }
+      addItem(newItem, item)
+      notifySuccess(`${item} ${product.title} added to cart!`)
+    }
+  }
+  const handleIncreaseQuantity = (item) => {
+    const result = products?.find((p) => p._id === item.id)
+    if (result) {
+      if (item?.quantity < result?.quantity) {
+        updateItemQuantity(item.id, item.quantity + 1)
+      } else {
+        notifyError("No more quantity available for this product!")
+      }
     }
   }
 
