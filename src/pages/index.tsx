@@ -8,10 +8,11 @@ import { NextPageWithLayout } from "types/global"
 import ProductCard from "@modules/products/templates/theme/ProductCard"
 // import NavBarTop from "../modules/layout/templates/nav/navbarTop"
 import { useFeaturedProductsQuery } from "@lib/hooks/use-layout-data"
+import { dehydrate, QueryClient, useQuery } from "react-query"
 
 const Home: NextPageWithLayout = () => {
   const { data } = useFeaturedProductsQuery()
-  console.log("products", data)
+  console.log("alldata", data)
   return (
     <>
       <Head
@@ -23,8 +24,8 @@ const Home: NextPageWithLayout = () => {
       {/* <FeaturedProducts /> */}
       <div className="flex">
         <div className="w-full">
+          {/* <FeaturedProducts /> */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-3 lg:gap-3">
-            {/* <FeaturedProducts /> */}
             {data &&
               data.map((productDetails) => (
                 <ProductCard key={productDetails.id} product={productDetails} />

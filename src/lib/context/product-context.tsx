@@ -9,7 +9,7 @@ import React, {
   useMemo,
   useState,
 } from "react"
-import { Product, Variant } from "types/medusa"
+// import { Product, Variant } from "types/medusa"
 import { useStore } from "./store-context"
 
 interface ProductContext {
@@ -17,7 +17,7 @@ interface ProductContext {
   quantity: number
   disabled: boolean
   inStock: boolean
-  variant?: Variant
+  variant?: /* Variant */ any
   maxQuantityMet: boolean
   options: Record<string, string>
   updateOptions: (options: Record<string, string>) => void
@@ -30,7 +30,7 @@ const ProductActionContext = createContext<ProductContext | null>(null)
 
 interface ProductProviderProps {
   children?: React.ReactNode
-  product: Product
+  product: any /* Product */
 }
 
 export const ProductProvider = ({
@@ -46,10 +46,12 @@ export const ProductProvider = ({
   const { cart } = useCart()
   const { variants } = product
 
+  console.log("context", product)
+
   useEffect(() => {
     // initialize the option state
     const optionObj: Record<string, string> = {}
-    for (const option of product.options) {
+    for (const option of product?.options) {
       Object.assign(optionObj, { [option.id]: undefined })
     }
     setOptions(optionObj)
@@ -82,7 +84,7 @@ export const ProductProvider = ({
       }
     }
 
-    return variants.find((v) => v.id === variantId)
+    return variants.find((v: any) => v.id === variantId)
   }, [options, variantRecord, variants])
 
   // if product only has one variant, then select it
@@ -128,13 +130,14 @@ export const ProductProvider = ({
   }
 
   const increaseQuantity = () => {
-    const maxQuantity = variant?.inventory_quantity || 0
+    // const maxQuantity = variant?.inventory_quantity || 0
 
-    if (maxQuantity > quantity + 1) {
-      setQuantity(quantity + 1)
-    } else {
-      setMaxQuantityMet(true)
-    }
+    // if (maxQuantity > quantity + 1) {
+    //   setQuantity(quantity + 1)
+    // } else {
+    //   setMaxQuantityMet(true)
+    // }
+    console.log("Helllo")
   }
 
   const decreaseQuantity = () => {

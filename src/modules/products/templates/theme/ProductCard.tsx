@@ -1,3 +1,4 @@
+import { ProductProvider } from "@lib/context/product-context"
 import ProductModal from "@modules/common/components/modal/ProductModal"
 import Price from "@modules/common/components/price/Price"
 import Image from "next/image"
@@ -14,25 +15,26 @@ const ProductCard: React.FC<IProductCardProps> = ({
   const [modalOpen, setModalOpen] = useState(false)
 
   console.log("data", product)
+  // console.log("quan", product.quantity)
   return (
     <>
+      {/* <ProductProvider product={product}> */}
       <ProductModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
-        product={product}
+        productDetails={product}
       />
+      {/* </ProductProvider> */}
       <div className="group box-border overflow-hidden flex rounded-md shadow-sm pe-0 flex-col items-center bg-white relative">
         <div
           onClick={() => setModalOpen(!modalOpen)}
           className="relative flex justify-center w-full cursor-pointer"
         >
-          {
-            /* product.quantity */ 12 <= 0 && (
-              <span className="absolute inline-flex items-center justify-center px-2 py-1 bg-red-100 text-red-600 border-0 rounded-full text-xs font-semibold font-serif z-10 left-4 top-4">
-                Stock Out
-              </span>
-            )
-          }
+          {product.quantity <= 0 && (
+            <span className="absolute inline-flex items-center justify-center px-2 py-1 bg-red-100 text-red-600 border-0 rounded-full text-xs font-semibold font-serif z-10 left-4 top-4">
+              Stock Out
+            </span>
+          )}
           {/* <Discount product={product} /> */}
 
           <Image
@@ -56,7 +58,7 @@ const ProductCard: React.FC<IProductCardProps> = ({
             <Price product={product} card={true} />
             <button
               //   onClick={() => handleAddItem(product)}
-              disabled={/* product.quantity */ 12 < 1}
+              disabled={product.quantity < 1}
               aria-label="cart"
               className="h-9 w-9 flex items-center justify-center border border-gray-200 rounded text-emerald-500 hover:border-emerald-500 hover:bg-emerald-500 hover:text-white transition-all"
             >
