@@ -43,12 +43,12 @@ const useAddToCart = () => {
     console.log("hi")
     // console.log(variants)
     const addToCart = () => {
-      if (variant) {
-        addItem({
-          variantId: variant.id,
-          quantity,
-        })
-      }
+      // if (variant) {
+      //   addItem({
+      //     variantId: variant.id,
+      //     quantity,
+      //   })
+      // }
 
       //   const result = items.find((i) => i.id === product._id)
       //   if (result !== undefined) {
