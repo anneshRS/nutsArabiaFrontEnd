@@ -1,5 +1,5 @@
 import { useStore } from "@lib/context/store-context"
-
+import { Product, Variant } from "types/medusa"
 import React, {
   createContext,
   useContext,
