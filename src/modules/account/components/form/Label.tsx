@@ -1,6 +1,10 @@
 import React from "react"
 
-const Label = ({ label }) => {
+interface ILabelProps{
+  label:any
+}
+
+const Label:React.FC<ILabelProps> = ({ label }:ILabelProps) => {
   return (
     <label className="block text-gray-500 font-medium text-sm leading-none mb-2">
       {label}
