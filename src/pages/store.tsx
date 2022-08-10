@@ -66,6 +66,6 @@ const Store = () => {
   )
 }
 
-Store.getLayout = (page) => <Layout>{page}</Layout>
+Store.getLayout = (page:any) => <Layout>{page}</Layout>
 
 export default Store
