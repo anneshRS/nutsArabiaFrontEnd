@@ -24,12 +24,12 @@ const CartTemplate = () => {
     return <SkeletonCartPage />
   }
 
-  const handleOpenLogin = () => {
-    if (router.push("/?redirect=/checkout")) {
-      toggleCartDrawer()
-      setModalOpen(!modalOpen)
-    }
-  }
+  // const handleOpenLogin = () => {
+  //   if (router.push("/?redirect=/checkout")) {
+  //     toggleCartDrawer()
+  //     setModalOpen(!modalOpen)
+  //   }
+  // }
 
   const checkoutClass = (
     <button
@@ -105,7 +105,7 @@ const CartTemplate = () => {
               <span>
                 {
                   /* !userInfo */ true ? (
-                    <div onClick={handleOpenLogin}>{checkoutClass}</div>
+                    <div /* onClick={handleOpenLogin} */>{checkoutClass}</div>
                   ) : (
                     <Link href="/checkout">
                       <a>{checkoutClass}</a>
