@@ -28,7 +28,8 @@ const Register: React.FC<IRegisterProps> = ({
         <div className="grid grid-cols-1 gap-5">
           <div className="form-group">
             <InputArea
-              // register={register}
+              register=""
+              defaultValue=""
               label="Name"
               name="name"
               type="text"
@@ -41,7 +42,8 @@ const Register: React.FC<IRegisterProps> = ({
 
           <div className="form-group">
             <InputArea
-              // register={register}
+              register=""
+              defaultValue=""
               label="Email"
               name="email"
               type="email"
@@ -52,7 +54,8 @@ const Register: React.FC<IRegisterProps> = ({
           </div>
           <div className="form-group">
             <InputArea
-              // register={register}
+              register=""
+              defaultValue=""
               label="Password"
               name="password"
               type="password"
