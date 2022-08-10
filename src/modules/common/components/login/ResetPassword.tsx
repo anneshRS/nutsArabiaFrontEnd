@@ -26,7 +26,8 @@ const ResetPassword = (/* { setShowResetPassword, setModalOpen } */) => {
         <div className="grid grid-cols-1 gap-5">
           <div className="form-group">
             <InputArea
-              // register={register}
+              register=""
+              defaultValue=""
               label="Email"
               name="verifyEmail"
               type="email"
