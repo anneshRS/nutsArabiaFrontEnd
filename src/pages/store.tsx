@@ -7,22 +7,14 @@ import ProductCard from "@modules/products/templates/theme/ProductCard"
 import RefinementList from "@modules/store/components/refinement-list"
 import { useMemo, useState } from "react"
 import { NextPageWithLayout } from "types/global"
-<<<<<<< HEAD
-import { useCart } from "medusa-react"
-
-=======
 import { useInfiniteQuery } from "react-query"
 import { fetchProductsList } from "@lib/data"
 import { useCart } from "medusa-react"
 import usePreviews from "@lib/hooks/use-previews"
-import ProductCard from "@modules/products/templates/theme/ProductCard"
->>>>>>> 732d8fd24e3f87df0d0bf4a69bcf0a87236b2d55
+
 
 const Store = () => {
   const [params, setParams] = useState<StoreGetProductsParams>({})
-<<<<<<< HEAD
-  
-=======
   const { cart } = useCart()
 
   const queryParams = useMemo(() => {
@@ -50,19 +42,12 @@ const Store = () => {
     )
   const previews = usePreviews({ pages: data?.pages, region: cart?.region })
   console.log("preview", previews)
->>>>>>> 732d8fd24e3f87df0d0bf4a69bcf0a87236b2d55
 
   return (
     <>
       <Head title="Store" description="Explore all of our products." />
       <div className="flex flex-col small:flex-row small:items-start py-6">
         <RefinementList refinementList={params} setRefinementList={setParams} />
-<<<<<<< HEAD
-        
-        
-         <InfiniteProducts params={params}  />
-         
-=======
         {/* <InfiniteProducts params={params} /> */}
         <div className="flex">
           <div className="w-full">
@@ -78,7 +63,6 @@ const Store = () => {
             </div>
           </div>
         </div>
->>>>>>> 732d8fd24e3f87df0d0bf4a69bcf0a87236b2d55
       </div>
     </>
   )
