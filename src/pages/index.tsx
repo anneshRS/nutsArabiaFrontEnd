@@ -9,10 +9,12 @@ import ProductCard from "@modules/products/templates/theme/ProductCard"
 // import NavBarTop from "../modules/layout/templates/nav/navbarTop"
 import { useFeaturedProductsQuery } from "@lib/hooks/use-layout-data"
 import { dehydrate, QueryClient, useQuery } from "react-query"
+import { fetchProductsList, getCollectionData, getSiteData } from "@lib/data"
 
 const Home: NextPageWithLayout = () => {
   const { data } = useFeaturedProductsQuery()
-  console.log("alldata", data)
+  // const {  } = getSiteData()
+
   return (
     <>
       <Head

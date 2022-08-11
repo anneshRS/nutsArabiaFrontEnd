@@ -20,4 +20,6 @@ const queryClient = new QueryClient({
 
 const medusaClient = new Medusa({ baseUrl: MEDUSA_BACKEND_URL, maxRetries: 3 })
 
+console.log(medusaClient)
+
 export { MEDUSA_BACKEND_URL, queryClient, medusaClient }

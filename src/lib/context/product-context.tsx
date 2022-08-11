@@ -9,6 +9,7 @@ import React, {
   useMemo,
   useState,
 } from "react"
+import { Variant } from "types/medusa"
 // import { Product, Variant } from "types/medusa"
 import { useStore } from "./store-context"
 
@@ -17,7 +18,7 @@ interface ProductContext {
   quantity: number
   disabled: boolean
   inStock: boolean
-  variant?: /* Variant */ any
+  variant?: Variant
   maxQuantityMet: boolean
   options: Record<string, string>
   updateOptions: (options: Record<string, string>) => void
@@ -44,9 +45,8 @@ export const ProductProvider = ({
 
   const { addItem } = useStore()
   const { cart } = useCart()
-  const { variants } = product
-
   console.log("context", product)
+  const { variants } = product
 
   useEffect(() => {
     // initialize the option state
@@ -130,14 +130,13 @@ export const ProductProvider = ({
   }
 
   const increaseQuantity = () => {
-    // const maxQuantity = variant?.inventory_quantity || 0
+    const maxQuantity = variant?.inventory_quantity || 0
 
-    // if (maxQuantity > quantity + 1) {
-    //   setQuantity(quantity + 1)
-    // } else {
-    //   setMaxQuantityMet(true)
-    // }
-    console.log("Helllo")
+    if (maxQuantity > quantity + 1) {
+      setQuantity(quantity + 1)
+    } else {
+      setMaxQuantityMet(true)
+    }
   }
 
   const decreaseQuantity = () => {

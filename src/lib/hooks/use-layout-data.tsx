@@ -108,3 +108,21 @@ export const useFeaturedProductsQuery = () => {
 
   return queryResults
 }
+
+export const useAllProductsQuery = () => {
+  // const queryResults = useQuery(
+  //   ["layout_featured_products", cart?.id, cart?.region],
+  //   () => fetchFeaturedProducts(cart?.id!, cart?.region!),
+  //   {
+  //     enabled: !!cart?.id && !!cart?.region,
+  //     staleTime: Infinity,
+  //     refetchOnWindowFocus: false,
+  //   }
+  // )
+  const queryResults = useQuery("repoData", () =>
+    fetch(
+      "https://nutsarabia-backend-staging-tiz3i.ondigitalocean.app/store/products"
+    ).then((res) => res.json())
+  )
+  return queryResults
+}
