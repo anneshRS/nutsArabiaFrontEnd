@@ -1,7 +1,9 @@
 import { StoreGetProductsParams } from "@medusajs/medusa"
 import Head from "@modules/common/components/head"
 import Layout from "@modules/layout/templates"
+import AllProducts from "@modules/products/components/allProducts/AllProducts"
 import InfiniteProducts from "@modules/products/components/infinite-products"
+import ProductCard from "@modules/products/templates/theme/ProductCard"
 import RefinementList from "@modules/store/components/refinement-list"
 import { useMemo, useState } from "react"
 import { NextPageWithLayout } from "types/global"
@@ -9,7 +11,7 @@ import { useInfiniteQuery } from "react-query"
 import { fetchProductsList } from "@lib/data"
 import { useCart } from "medusa-react"
 import usePreviews from "@lib/hooks/use-previews"
-import ProductCard from "@modules/products/templates/theme/ProductCard"
+
 
 const Store = () => {
   const [params, setParams] = useState<StoreGetProductsParams>({})

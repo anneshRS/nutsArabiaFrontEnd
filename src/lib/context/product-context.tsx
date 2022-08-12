@@ -9,7 +9,8 @@ import React, {
   useMemo,
   useState,
 } from "react"
-import { Product, Variant } from "types/medusa"
+import { Variant } from "types/medusa"
+// import { Product, Variant } from "types/medusa"
 import { useStore } from "./store-context"
 
 interface ProductContext {
@@ -30,7 +31,7 @@ const ProductActionContext = createContext<ProductContext | null>(null)
 
 interface ProductProviderProps {
   children?: React.ReactNode
-  product: Product
+  product: any /* Product */
 }
 
 export const ProductProvider = ({
@@ -44,12 +45,13 @@ export const ProductProvider = ({
 
   const { addItem } = useStore()
   const { cart } = useCart()
+  console.log("context", product)
   const { variants } = product
 
   useEffect(() => {
     // initialize the option state
     const optionObj: Record<string, string> = {}
-    for (const option of product.options) {
+    for (const option of product?.options) {
       Object.assign(optionObj, { [option.id]: undefined })
     }
     setOptions(optionObj)
@@ -82,7 +84,7 @@ export const ProductProvider = ({
       }
     }
 
-    return variants.find((v) => v.id === variantId)
+    return variants.find((v: any) => v.id === variantId)
   }, [options, variantRecord, variants])
 
   // if product only has one variant, then select it

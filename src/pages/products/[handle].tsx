@@ -25,7 +25,7 @@ const fetchProduct = async (handle: string) => {
 const ProductPage: NextPageWithLayout<PrefetchedPageProps> = ({ notFound }) => {
   const { query, isFallback, replace } = useRouter()
   const handle = typeof query.handle === "string" ? query.handle : ""
-
+  console.log("handle", handle)
   const { data, isError, isLoading, isSuccess } = useQuery(
     [`get_product`, handle],
     () => fetchProduct(handle),
