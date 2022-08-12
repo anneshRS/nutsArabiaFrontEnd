@@ -30,6 +30,9 @@ const Login = () => {
   } = useForm<SignInCredentials>()
 
   const onSubmit = handleSubmit(async (credentials) => {
+    credentials["email"]="justin@gmail.com"
+    credentials["password"]="12345678"
+    console.log("onSubmit = handleSubmit",credentials)
     medusaClient.auth
       .authenticate(credentials)
       .then(() => {

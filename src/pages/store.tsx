@@ -12,7 +12,6 @@ import { fetchProductsList } from "@lib/data"
 import { useCart } from "medusa-react"
 import usePreviews from "@lib/hooks/use-previews"
 
-
 const Store = () => {
   const [params, setParams] = useState<StoreGetProductsParams>({})
   const { cart } = useCart()
@@ -47,19 +46,21 @@ const Store = () => {
     <>
       <Head title="Store" description="Explore all of our products." />
       <div className="flex flex-col small:flex-row small:items-start py-6">
-        <RefinementList refinementList={params} setRefinementList={setParams} />
+        {/* <RefinementList refinementList={params} setRefinementList={setParams} /> */}
         {/* <InfiniteProducts params={params} /> */}
-        <div className="flex">
-          <div className="w-full">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-3 lg:gap-3">
-              {previews && previews.length > 0
-                ? previews.map((productDetails) => (
-                    <ProductCard
-                      key={productDetails.id}
-                      product={productDetails}
-                    />
-                  ))
-                : ""}
+        <div className="mx-auto max-w-screen-2xl px-4 sm:px-10">
+          <div className="flex">
+            <div className="w-full">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-3 lg:gap-3">
+                {previews && previews.length > 0
+                  ? previews.map((productDetails) => (
+                      <ProductCard
+                        key={productDetails.id}
+                        product={productDetails}
+                      />
+                    ))
+                  : ""}
+              </div>
             </div>
           </div>
         </div>
