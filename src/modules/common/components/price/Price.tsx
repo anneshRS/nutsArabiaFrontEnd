@@ -1,23 +1,32 @@
 import React from "react"
 
 export interface IPriceProps {
-  product: any
+  product?: any
   card?: any
+  originalPrice?: any
+  discountedPrice?: any
 }
 
-const Price: React.FC<IPriceProps> = ({ product, card }) => {
+const Price: React.FC<IPriceProps> = ({
+  product,
+  card,
+  originalPrice,
+  discountedPrice,
+}) => {
+
   return (
-    <div className="font-serif product-price font-bold">
+    <div className="font-serif product-price font-bold ">
       {
         /* product.discount */ true ? (
           <span
             className={
               card
-                ? "inline-block text-lg font-semibold text-gray-800"
+                ? "inline-block sm:text-lg text-sm font-semibold text-gray-800"
                 : "inline-block text-2xl"
             }
           >
-            {product.price.original_price}
+            {originalPrice}
+            {/* {product.price.original_price} */}
           </span>
         ) : (
           <span
@@ -32,11 +41,11 @@ const Price: React.FC<IPriceProps> = ({ product, card }) => {
         )
       }
       {
-        /* product.discount */ true ? (
+        /* product.discount */ false ? (
           <del
             className={
               card
-                ? "sm:text-sm font-normal text-base text-gray-400 ml-1"
+                ? "sm:text-sm text-xs font-normal text-gray-400 ml-1"
                 : "text-lg font-normal text-gray-400 ml-1"
             }
           >

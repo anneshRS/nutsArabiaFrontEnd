@@ -21,6 +21,7 @@
       "@modules/*": ["modules/*"],
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
+      "@services/*": ["services/*"],
     }
   },
   "include": [

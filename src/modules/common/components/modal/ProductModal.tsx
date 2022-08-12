@@ -17,10 +17,11 @@ import { GetStaticProps } from "next"
 import ProductCard from "@modules/products/templates/theme/ProductCard"
 
 export interface IProductModalProps {
-  productDetails: any
+  productDetails?: any
   modalOpen: any
   setModalOpen: any
-  // productVariant?: any
+  productVariant?: any
+  setCurrentDisplayableVariantPatent?:any
 }
 const fetchProduct = async (handle: string) => {
   return await medusaClient.products
@@ -30,9 +31,10 @@ const fetchProduct = async (handle: string) => {
 
 const ProductModal: React.FC<IProductModalProps> = ({
   productDetails,
-  // productVariant,
+  productVariant,
   modalOpen,
   setModalOpen,
+  setCurrentDisplayableVariantPatent
 }: IProductModalProps) => {
   // const { handleAddItem, setItem, item } = useAddToCart()
   // const [item, setItem] = useState(1)
@@ -57,21 +59,27 @@ const ProductModal: React.FC<IProductModalProps> = ({
   // const product = data
   // console.log("queData", product)
 
-  console.log("first", productDetails)
-
+  console.log("productDetails===========[ProductModal]=======>", productDetails)
+  console.log(
+    "productVariant===========[ProductModal]==========>",
+    productVariant
+  )
   return (
-    // <MainModal modalOpen={modalOpen} setModalOpen={setModalOpen}>
-    //   {/* {productVariant?.map((variant: any) => {
-    //     ;<ProductCard key={productDetails.id} product={product} />
-    //   })} */}
-    //   hii
-    // </MainModal>
-
     // <ProductProvider product={product}>
 
     <MainModal modalOpen={modalOpen} setModalOpen={setModalOpen}>
       <div className="inline-block overflow-y-auto h-full align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-        {productDetails[0].id}
+        <div className="flex flex-col lg:flex-row md:flex-row w-full max-w-4xl overflow-hidden gap-2 md:gap-3 lg:gap-3">
+          {productVariant?.map((variant: any) => (
+            <ProductCard
+              key={productDetails.id}
+              product={productDetails}
+              isOnModal={true}
+              variantId={variant.id}
+              setCurrentDisplayableVariantPatent={setCurrentDisplayableVariantPatent}
+            />
+          ))}
+        </div>
       </div>
     </MainModal>
     // </ProductProvider>
