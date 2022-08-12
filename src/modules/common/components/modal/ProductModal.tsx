@@ -71,7 +71,9 @@ const ProductModal: React.FC<IProductModalProps> = ({
 
     <MainModal modalOpen={modalOpen} setModalOpen={setModalOpen}>
       <div className="inline-block overflow-y-auto h-full align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-        {productDetails[0].id}
+        {productDetails?.map((item: any) => {
+          item?.title
+        })}
       </div>
     </MainModal>
     // </ProductProvider>
