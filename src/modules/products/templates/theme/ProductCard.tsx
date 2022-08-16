@@ -9,6 +9,7 @@ import { useQuery } from "react-query"
 import { formatVariantPrice, useCart } from "medusa-react"
 import { ChevronDownIcon } from "@heroicons/react/outline"
 import getDisplayableprice from "@services/PriceService"
+import Link from "next/link"
 
 export interface IProductCardProps {
   product: any
@@ -107,14 +108,15 @@ IProductCardProps) => {
                 </span>
               )}
               {/* <Discount product={product} /> */}
-
-              <Image
-                src={product.thumbnail}
-                width={160}
-                height={160}
-                alt={product.title}
-                className="object-cover transition duration-150 ease-linear transform group-hover:scale-105"
-              />
+              <Link href={`/products/${product.handle}`} passHref>
+                <Image
+                  src={product.thumbnail}
+                  width={160}
+                  height={160}
+                  alt={product.title}
+                  className="object-cover transition duration-150 ease-linear transform group-hover:scale-105"
+                />
+              </Link>
             </div>
             <div className="w-full px-3 lg:px-4 py-2 overflow-hidden">
               <div className="relative">
