@@ -8,6 +8,7 @@ module.exports = withStoreConfig({
     domains: [
       "medusa-public-images.s3.eu-west-1.amazonaws.com",
       "nutsarabiaproductassets.sgp1.digitaloceanspaces.com",
+      "i.ibb.co",
       "localhost",
     ],
   },

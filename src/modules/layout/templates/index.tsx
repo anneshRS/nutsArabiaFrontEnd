@@ -9,7 +9,13 @@ import MobileFooter from "@modules/layout/templates/footer/MobileFooter"
 import FeatureCard from "@modules/common/components/theme/feature-card/FeatureCard"
 import { ToastContainer } from "react-toastify"
 
-const Layout: React.FC = ({ children }) => {
+ interface IProductCardProps {
+  title?: any
+  description?: any
+  children?:any
+}
+
+const Layout: React.FC<IProductCardProps> = ({ title, description, children }: IProductCardProps) => {
   return (
     // <div>
     //   <Nav />
@@ -19,15 +25,15 @@ const Layout: React.FC = ({ children }) => {
     <>
       <ToastContainer />
       <div className="font-sans">
-        {/* <Head>
-        <title>
-          {title
-            ? `KachaBazar | ${title}`
-            : 'KachaBazar - React Grocery & Organic Food Store e-commerce Template'}
-        </title>
-        {description && <meta name="description" content={description} />}
-        <link ref="icon" href="/favicon.png" />
-      </Head> */}
+        <Head>
+          <title>
+            {title
+              ? `KachaBazar | ${title}`
+              : "KachaBazar - React Grocery & Organic Food Store e-commerce Template"}
+          </title>
+          {description && <meta name="description" content={description} />}
+          <link ref="icon" href="/favicon.png" />
+        </Head>
         <NavBarTop />
         <NavBar />
         <div className="bg-gray-50">{children}</div>
