@@ -13,7 +13,6 @@ const Price: React.FC<IPriceProps> = ({
   originalPrice,
   discountedPrice,
 }) => {
-
   return (
     <div className="font-serif product-price font-bold ">
       {

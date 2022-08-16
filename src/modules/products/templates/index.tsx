@@ -10,7 +10,7 @@ import ProductInfo from "@modules/products/templates/product-info"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { FiChevronRight, FiMinus, FiPlus } from "react-icons/fi"
 import {
   FacebookIcon,
@@ -27,6 +27,7 @@ import {
 import ImageGallery from "../components/image-gallary"
 import MobileActions from "../components/mobile-actions"
 import Card from "../components/slug-card/Card"
+import getDisplayableprice from "@services/PriceService"
 
 type ProductTemplateProps = {
   product: Product
@@ -34,6 +35,11 @@ type ProductTemplateProps = {
 
 const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
   const router = useRouter()
+  const [displayableImage, setDisplayableImage] = useState(product.images[0])
+  const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
+
+  console.log(selectedVariant)
+
   // const info = useRef<HTMLDivElement>(null)
 
   // const inView = useIntersection(info, "0px")
@@ -93,10 +99,36 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
         </div>
         <div className="w-full rounded-lg p-3 lg:p-12 bg-white">
           <div className="flex flex-col xl:flex-row">
+            <div>
+              {product.images.map((img: any) => {
+                return (
+                  <div
+                    key={img.id}
+                    className={`${
+                      displayableImage.id === img.id
+                        ? "border-green-500"
+                        : "border-slate-500  hover:border-orange-500"
+                    }  flex m-2 items-center  border h-20 w-16 content-center `}
+                    onClick={() => setDisplayableImage(img)}
+                  >
+                    <Image
+                      src={img.url}
+                      alt={img.title}
+                      // layout="fit"
+                      width={60}
+                      height={60}
+                      priority
+                    ></Image>
+                  </div>
+                )
+              })}
+            </div>
+
             <div className="flex-shrink-0 xl:pr-10 lg:block w-full mx-auto md:w-6/12 lg:w-5/12 xl:w-4/12">
               {/* <Discount product={product} slug={true} /> */}
+
               <Image
-                src={product.thumbnail}
+                src={displayableImage.url}
                 alt={product.title}
                 layout="responsive"
                 width={650}
@@ -120,7 +152,12 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                       </span>
                     </p> */}
                   </div>
-                  <Price product={product} originalPrice={"AED 200"} />
+                  <Price
+                    product={product}
+                    originalPrice={`${selectedVariant.prices[0].currency_code.toUpperCase()} ${getDisplayableprice(
+                      selectedVariant.prices[0].amount
+                    )}`}
+                  />
                   <div className="mb-4 md:mb-5 block">
                     <Stock product={product} />
                   </div>
@@ -128,6 +165,32 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                     <p className="text-sm leading-6 text-gray-500 md:leading-7">
                       {product.description}
                     </p>
+                    <div className="mt-4">
+                      <h3 className="text-base font-semibold mb-1 font-serif">
+                        Select Quantity
+                      </h3>
+                    </div>
+                    <div className="flex">
+                      {product.variants.map((variant: any) => {
+                        return (
+                          <div
+                            key={variant.id}
+                            className={`${
+                              selectedVariant.id === variant.id
+                                ? "border-green-500"
+                                : "hover:border-orange-500"
+                            } flex flex-row border items-center justify-center  w-20 h-12 mr-2 `}
+                            onClick={() => setSelectedVariant(variant)}
+                          >
+                            <div className="text-gray-500">
+                              {variant.options.map(
+                                (innerData: any) => innerData.value
+                              )}
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
                     <div className="flex items-center mt-4">
                       <div className="flex items-center justify-between space-s-3 sm:space-s-4 w-full">
                         <div className="group flex items-center justify-between rounded-md overflow-hidden flex-shrink-0 border h-11 md:h-12 border-gray-300">
@@ -140,7 +203,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                               <FiMinus />
                             </span>
                           </button>
-                          <p className="font-semibold flex items-center justify-center h-full  transition-colors duration-250 ease-in-out cursor-default flex-shrink-0 text-base text-heading w-8  md:w-20 xl:w-24">
+                          <p className="font-semibold flex items-center justify-center h-full  transition-colors duration-250 ease-in-out cursor-default flex-shrink-0 text-base text-heading w-8  md:w-16 xl:w-16">
                             {/* {item} */} {"2"}
                           </p>
                           <button
