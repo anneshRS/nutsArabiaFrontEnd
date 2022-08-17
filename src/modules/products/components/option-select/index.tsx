@@ -20,17 +20,30 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
 
   return (
     <div className="flex flex-col gap-y-3">
-      <span className="text-base-semi">Select {title}</span>
-      <div className="grid grid-cols-3 lg:grid-cols-6 gap-2">
+      {/* <span className="text-base-semi">Select {title}</span> */}
+      <div className="mt-4">
+        <h3 className="text-base font-semibold mb-1 font-serif">
+          Select {title}
+        </h3>
+      </div>
+      {/* <div className="grid grid-cols-3 lg:grid-cols-6 gap-2"> */}
+      <div className="flex">
         {filteredOptions.map((v) => {
           return (
             <button
-              onClick={() => updateOption({ [option.id]: v })}
+              onClick={() => {
+                updateOption({ [option.id]: v })
+                console.log("selectedOptions", { [option.id]: v })
+              }}
               key={v}
-              className={clsx(
-                "border-gray-200 border text-xsmall-regular h-[50px] transition-all duration-200",
-                { "border-gray-900": v === current }
-              )}
+              // className={clsx(
+              //   "border-gray-200 border text-xsmall-regular h-[50px] transition-all duration-200",
+              //   { "border-gray-900": v === current }
+              // )}
+              className={`${
+                // selectedVariant.id === variant.id
+                v === current ? "border-green-500" : "hover:border-orange-500"
+              } flex flex-row border items-center rounded-md justify-center  w-20 h-12 mr-2`}
             >
               {v}
             </button>

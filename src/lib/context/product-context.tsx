@@ -140,8 +140,10 @@ export const ProductProvider = ({
   }
 
   const increaseQuantity = () => {
+    console.log("inventoryQuan", variant?.inventory_quantity)
     const maxQuantity = variant?.inventory_quantity || 0
-
+    console.log("maxQuan", maxQuantity)
+    console.log("quantity", quantity)
     if (maxQuantity > quantity + 1) {
       setQuantity(quantity + 1)
     } else {

@@ -29,6 +29,7 @@ import MobileActions from "../components/mobile-actions"
 import Card from "../components/slug-card/Card"
 import getDisplayableprice from "@services/PriceService"
 import { useProductActions } from "@lib/context/product-context"
+import OptionSelect from "../components/option-select"
 
 type ProductTemplateProps = {
   product: Product
@@ -38,8 +39,16 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
   const router = useRouter()
   const [displayableImage, setDisplayableImage] = useState(product.images[0])
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
-  const { updateOptions, addToCart, options, inStock, variant } =
-    useProductActions()
+  const {
+    updateOptions,
+    addToCart,
+    options,
+    inStock,
+    variant,
+    increaseQuantity,
+    decreaseQuantity,
+    quantity,
+  } = useProductActions()
 
   console.log(selectedVariant)
 
@@ -47,6 +56,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
 
   // const inView = useIntersection(info, "0px")
 
+  console.log("roduct", product)
   return (
     // <ProductProvider product={product}>
     //   <div className="content-container flex flex-col small:flex-row small:items-start py-6 relative">
@@ -168,12 +178,12 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                     <p className="text-sm leading-6 text-gray-500 md:leading-7">
                       {product.description}
                     </p>
-                    <div className="mt-4">
+                    {/* <div className="mt-4">
                       <h3 className="text-base font-semibold mb-1 font-serif">
                         Select Quantity
                       </h3>
-                    </div>
-                    <div className="flex">
+                    </div> */}
+                    {/* <div className="flex">
                       {product.variants.map((variant: any) => {
                         return (
                           <div
@@ -193,7 +203,23 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                           </div>
                         )
                       })}
-                    </div>
+                    </div> */}
+                    {product.variants.length > 1 && (
+                      <div className="my-8 flex flex-col gap-y-6">
+                        {product.options.map((option) => {
+                          return (
+                            <div key={option.id}>
+                              <OptionSelect
+                                option={option}
+                                current={options[option.id]}
+                                updateOption={updateOptions}
+                                title={option.title}
+                              />
+                            </div>
+                          )
+                        })}
+                      </div>
+                    )}
                     <div className="flex items-center mt-4">
                       <div className="flex items-center justify-between space-s-3 sm:space-s-4 w-full">
                         <div className="group flex items-center justify-between rounded-md overflow-hidden flex-shrink-0 border h-11 md:h-12 border-gray-300">
@@ -201,13 +227,14 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                             // onClick={() => setItem(item - 1)}
                             // disabled={item === 1}
                             className="flex items-center justify-center flex-shrink-0 h-full transition ease-in-out duration-300 focus:outline-none w-8 md:w-12 text-heading border-e border-gray-300 hover:text-gray-500"
+                            onClick={() => decreaseQuantity()}
                           >
                             <span className="text-dark text-base">
                               <FiMinus />
                             </span>
                           </button>
                           <p className="font-semibold flex items-center justify-center h-full  transition-colors duration-250 ease-in-out cursor-default flex-shrink-0 text-base text-heading w-8  md:w-16 xl:w-16">
-                            {/* {item} */} {"2"}
+                            {quantity}
                           </p>
                           <button
                             // onClick={() => setItem(item + 1)}
@@ -216,6 +243,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                             //   product.quantity === item
                             // }
                             className="flex items-center justify-center h-full flex-shrink-0 transition ease-in-out duration-300 focus:outline-none w-8 md:w-12 text-heading border-s border-gray-300 hover:text-gray-500"
+                            onClick={() => increaseQuantity()}
                           >
                             <span className="text-dark text-base">
                               <FiPlus />
