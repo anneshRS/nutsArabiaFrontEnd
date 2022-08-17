@@ -28,6 +28,7 @@ import ImageGallery from "../components/image-gallary"
 import MobileActions from "../components/mobile-actions"
 import Card from "../components/slug-card/Card"
 import getDisplayableprice from "@services/PriceService"
+import { useProductActions } from "@lib/context/product-context"
 
 type ProductTemplateProps = {
   product: Product
@@ -37,6 +38,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
   const router = useRouter()
   const [displayableImage, setDisplayableImage] = useState(product.images[0])
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
+  const { updateOptions, addToCart, options, inStock, variant } =
+    useProductActions()
 
   console.log(selectedVariant)
 
@@ -108,7 +111,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                       displayableImage.id === img.id
                         ? "border-green-500"
                         : "border-slate-500  hover:border-orange-500"
-                    }  flex m-2 items-center  border h-20 w-16 content-center `}
+                    }  flex m-2 items-center rounded-sm border h-20 w-16 content-center`}
                     onClick={() => setDisplayableImage(img)}
                   >
                     <Image
@@ -179,7 +182,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                               selectedVariant.id === variant.id
                                 ? "border-green-500"
                                 : "hover:border-orange-500"
-                            } flex flex-row border items-center justify-center  w-20 h-12 mr-2 `}
+                            } flex flex-row border items-center rounded-md justify-center  w-20 h-12 mr-2 `}
                             onClick={() => setSelectedVariant(variant)}
                           >
                             <div className="text-gray-500">
@@ -221,6 +224,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                         </div>
                         <button
                           // onClick={() => handleAddItem(product)}
+                          onClick={() => addToCart()}
                           // disabled={product.quantity < 1}
                           className="text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-serif text-center justify-center border-0 border-transparent rounded-md focus-visible:outline-none focus:outline-none text-white px-4 ml-4 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white bg-emerald-500 hover:bg-emerald-600 w-full h-12"
                         >
