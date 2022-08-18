@@ -79,7 +79,7 @@ IProductCardProps) => {
   return (
     <>
       {data && Object.keys(data).length > 0 && (
-        <>
+        <ProductProvider product={data}>
           {!isOnModal && (
             <ProductModal
               modalOpen={modalOpen}
@@ -184,7 +184,7 @@ IProductCardProps) => {
               </button>
             </div>
           </div>
-        </>
+        </ProductProvider>
       )}
     </>
   )

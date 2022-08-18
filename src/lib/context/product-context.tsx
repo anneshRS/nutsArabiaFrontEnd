@@ -9,8 +9,8 @@ import React, {
   useMemo,
   useState,
 } from "react"
-import { Variant } from "types/medusa"
-// import { Product, Variant } from "types/medusa"
+// import { Variant  } from "types/medusa"
+import { Product, Variant } from "types/medusa"
 import { useStore } from "./store-context"
 
 interface ProductContext {
@@ -31,7 +31,7 @@ const ProductActionContext = createContext<ProductContext | null>(null)
 
 interface ProductProviderProps {
   children?: React.ReactNode
-  product: any /* Product */
+  product: Product
 }
 
 export const ProductProvider = ({
@@ -47,6 +47,7 @@ export const ProductProvider = ({
   const { cart } = useCart()
   console.log("context", product)
   const { variants } = product
+  console.log("variants", variants)
 
   useEffect(() => {
     // initialize the option state
@@ -54,36 +55,44 @@ export const ProductProvider = ({
     for (const option of product?.options) {
       Object.assign(optionObj, { [option.id]: undefined })
     }
+    console.log("useEffect=======optionObj", optionObj)
     setOptions(optionObj)
   }, [product])
 
   // memoized record of the product's variants
   const variantRecord = useMemo(() => {
     const map: Record<string, Record<string, string>> = {}
-
+    console.log("variantRecord 1", variants)
     for (const variant of variants) {
       const tmp: Record<string, string> = {}
-
+      console.log("variantRecord 2", variant)
       for (const option of variant.options) {
         tmp[option.option_id] = option.value
       }
-
+      console.log("variantRecord 3", tmp)
       map[variant.id] = tmp
     }
-
+    console.log("map", map)
     return map
   }, [variants])
 
   // memoized function to check if the current options are a valid variant
   const variant = useMemo(() => {
     let variantId: string | undefined = undefined
-
+    console.log("in variant 1", variantRecord)
+    console.log("in variant 2", options)
     for (const key of Object.keys(variantRecord)) {
+      console.log(variantRecord[key], "===================", options)
+      console.log("isEqual", isEqual(variantRecord[key], options))
       if (isEqual(variantRecord[key], options)) {
         variantId = key
       }
     }
-
+    console.log("variantId", variantId)
+    console.log(
+      "variants.find",
+      variants.find((v: any) => v.id === variantId)
+    )
     return variants.find((v: any) => v.id === variantId)
   }, [options, variantRecord, variants])
 
@@ -121,6 +130,7 @@ export const ProductProvider = ({
   }
 
   const addToCart = () => {
+    console.log("addItem", variant /* .id */, quantity)
     if (variant) {
       addItem({
         variantId: variant.id,
@@ -130,8 +140,10 @@ export const ProductProvider = ({
   }
 
   const increaseQuantity = () => {
+    console.log("inventoryQuan", variant?.inventory_quantity)
     const maxQuantity = variant?.inventory_quantity || 0
-
+    console.log("maxQuan", maxQuantity)
+    console.log("quantity", quantity)
     if (maxQuantity > quantity + 1) {
       setQuantity(quantity + 1)
     } else {
@@ -148,7 +160,7 @@ export const ProductProvider = ({
       }
     }
   }
-
+  console.log("variant", variant)
   return (
     <ProductActionContext.Provider
       value={{

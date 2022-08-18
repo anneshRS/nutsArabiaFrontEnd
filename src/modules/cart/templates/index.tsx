@@ -11,6 +11,7 @@ import { IoBagCheckOutline, IoClose, IoBagHandle } from "react-icons/io5"
 import { SidebarContext } from "@modules/common/components/context/SidebarContext"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import CartItem from "../CartItem"
 
 const CartTemplate = () => {
   const router = useRouter()
@@ -20,16 +21,19 @@ const CartTemplate = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const { toggleCartDrawer, closeCartDrawer } = useContext(SidebarContext)
 
+  console.log("cart", cart)
+  console.log("items", items)
+
   if (!cart || !cart?.id?.length || isLoading) {
     return <SkeletonCartPage />
   }
 
-  const handleOpenLogin = () => {
-    if (router.push("/?redirect=/checkout")) {
-      toggleCartDrawer()
-      setModalOpen(!modalOpen)
-    }
-  }
+  // const handleOpenLogin = () => {
+  //   if (router.push("/?redirect=/checkout")) {
+  //     toggleCartDrawer()
+  //     setModalOpen(!modalOpen)
+  //   }
+  // }
 
   const checkoutClass = (
     <button
@@ -97,6 +101,32 @@ const CartTemplate = () => {
             <EmptyCartMessage />
           </div>
         )} */}
+
+        <div className="overflow-y-scroll flex-grow scrollbar-hide w-full max-h-full">
+          {!cart.items && (
+            <div className="flex flex-col h-full justify-center">
+              <div className="flex flex-col items-center">
+                <div className="flex justify-center items-center w-20 h-20 rounded-full bg-emerald-100">
+                  <span className="text-emerald-600 text-4xl block">
+                    <IoBagHandle />
+                  </span>
+                </div>
+                <h3 className="font-serif font-semibold text-gray-700 text-lg pt-5">
+                  Your cart is empty
+                </h3>
+                <p className="px-12 text-center text-sm text-gray-500 pt-2">
+                  No items added in your cart. Please add product to your cart
+                  list.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {items.map((item, i) => (
+            <CartItem key={i + 1} item={item} cart={cart} />
+          ))}
+        </div>
+
         <div className="mx-5 my-3">
           {
             /* items.length */ 0 <= 0 ? (

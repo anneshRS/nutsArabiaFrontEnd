@@ -10,7 +10,7 @@ import ProductInfo from "@modules/products/templates/product-info"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { FiChevronRight, FiMinus, FiPlus } from "react-icons/fi"
 import {
   FacebookIcon,
@@ -24,10 +24,12 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share"
-import ImageGallery from "../components/image-gallary"
-import MobileActions from "../components/mobile-actions"
-import Card from "../components/slug-card/Card"
+import ImageGallery from "@modules/products/components/image-gallary"
+import MobileActions from "@modules/products/components/mobile-actions"
+import Card from "@modules/products/components/slug-card/Card"
 import getDisplayableprice from "@services/PriceService"
+import { useProductActions } from "@lib/context/product-context"
+import OptionSelect from "@modules/products/components/option-select"
 
 type ProductTemplateProps = {
   product: Product
@@ -37,13 +39,36 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
   const router = useRouter()
   const [displayableImage, setDisplayableImage] = useState(product.images[0])
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
+  const [selectedVariantId, setSelectedVariantId] = useState(null)
+  const {
+    updateOptions,
+    addToCart,
+    options,
+    inStock,
+    variant,
+    increaseQuantity,
+    decreaseQuantity,
+    quantity,
+  } = useProductActions()
 
   console.log(selectedVariant)
+
+  useEffect(() => {
+    let selectedVarient
+    if (selectedVariantId) {
+      selectedVarient = product.variants.filter(
+        (variant) => variant.id === selectedVariantId
+      )
+      console.log(selectedVariantId,"selectedVarient", selectedVarient[0])
+      // setSelectedVariant()
+    }
+  }, [selectedVariantId])
 
   // const info = useRef<HTMLDivElement>(null)
 
   // const inView = useIntersection(info, "0px")
 
+  console.log("roduct", product)
   return (
     // <ProductProvider product={product}>
     //   <div className="content-container flex flex-col small:flex-row small:items-start py-6 relative">
@@ -108,7 +133,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                       displayableImage.id === img.id
                         ? "border-green-500"
                         : "border-slate-500  hover:border-orange-500"
-                    }  flex m-2 items-center  border h-20 w-16 content-center `}
+                    }  flex m-2 items-center rounded-sm border h-20 w-16 content-center`}
                     onClick={() => setDisplayableImage(img)}
                   >
                     <Image
@@ -165,12 +190,12 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                     <p className="text-sm leading-6 text-gray-500 md:leading-7">
                       {product.description}
                     </p>
-                    <div className="mt-4">
+                    {/* <div className="mt-4">
                       <h3 className="text-base font-semibold mb-1 font-serif">
                         Select Quantity
                       </h3>
-                    </div>
-                    <div className="flex">
+                    </div> */}
+                    {/* <div className="flex">
                       {product.variants.map((variant: any) => {
                         return (
                           <div
@@ -179,7 +204,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                               selectedVariant.id === variant.id
                                 ? "border-green-500"
                                 : "hover:border-orange-500"
-                            } flex flex-row border items-center justify-center  w-20 h-12 mr-2 `}
+                            } flex flex-row border items-center rounded-md justify-center  w-20 h-12 mr-2 `}
                             onClick={() => setSelectedVariant(variant)}
                           >
                             <div className="text-gray-500">
@@ -190,7 +215,24 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                           </div>
                         )
                       })}
-                    </div>
+                    </div> */}
+                    {product.variants.length > 1 && (
+                      <div className="my-8 flex flex-col gap-y-6">
+                        {product.options.map((option) => {
+                          return (
+                            <div key={option.id}>
+                              <OptionSelect
+                                option={option}
+                                current={options[option.id]}
+                                updateOption={updateOptions}
+                                title={option.title}
+                                setSelectedVariantId={setSelectedVariantId}
+                              />
+                            </div>
+                          )
+                        })}
+                      </div>
+                    )}
                     <div className="flex items-center mt-4">
                       <div className="flex items-center justify-between space-s-3 sm:space-s-4 w-full">
                         <div className="group flex items-center justify-between rounded-md overflow-hidden flex-shrink-0 border h-11 md:h-12 border-gray-300">
@@ -198,13 +240,14 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                             // onClick={() => setItem(item - 1)}
                             // disabled={item === 1}
                             className="flex items-center justify-center flex-shrink-0 h-full transition ease-in-out duration-300 focus:outline-none w-8 md:w-12 text-heading border-e border-gray-300 hover:text-gray-500"
+                            onClick={() => decreaseQuantity()}
                           >
                             <span className="text-dark text-base">
                               <FiMinus />
                             </span>
                           </button>
                           <p className="font-semibold flex items-center justify-center h-full  transition-colors duration-250 ease-in-out cursor-default flex-shrink-0 text-base text-heading w-8  md:w-16 xl:w-16">
-                            {/* {item} */} {"2"}
+                            {quantity}
                           </p>
                           <button
                             // onClick={() => setItem(item + 1)}
@@ -213,6 +256,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                             //   product.quantity === item
                             // }
                             className="flex items-center justify-center h-full flex-shrink-0 transition ease-in-out duration-300 focus:outline-none w-8 md:w-12 text-heading border-s border-gray-300 hover:text-gray-500"
+                            onClick={() => increaseQuantity()}
                           >
                             <span className="text-dark text-base">
                               <FiPlus />
@@ -221,6 +265,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                         </div>
                         <button
                           // onClick={() => handleAddItem(product)}
+                          onClick={() => addToCart()}
                           // disabled={product.quantity < 1}
                           className="text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-serif text-center justify-center border-0 border-transparent rounded-md focus-visible:outline-none focus:outline-none text-white px-4 ml-4 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white bg-emerald-500 hover:bg-emerald-600 w-full h-12"
                         >
