@@ -106,12 +106,12 @@ const NavbarPromo = () => {
                       </Transition>
                     </Popover>
 
-                    <Link href="/about-us">
+                    <Link href="/AboutUs">
                       <a className="font-serif mx-4 py-2 text-sm font-medium hover:text-emerald-600">
                         About Us
                       </a>
                     </Link>
-                    <Link href="/contact-us">
+                    <Link href="/ContactUs">
                       <a className="font-serif mx-4 py-2 text-sm font-medium hover:text-emerald-600">
                         Contact Us
                       </a>
@@ -174,12 +174,12 @@ const NavbarPromo = () => {
             </Popover>
           </div>
           <div className="flex">
-            <Link href="/privacy-policy">
+            <Link href="/PrivacyPolicy">
               <a className="font-serif mx-4 py-2 text-sm font-medium hover:text-emerald-600">
                 Privacy Policy
               </a>
             </Link>
-            <Link href="/terms-and-conditions">
+            <Link href="/TermsAndConditions">
               <a className="font-serif mx-4 py-2 text-sm font-medium hover:text-emerald-600">
                 Terms & Conditions
               </a>
