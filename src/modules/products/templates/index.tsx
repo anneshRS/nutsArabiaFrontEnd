@@ -10,7 +10,7 @@ import ProductInfo from "@modules/products/templates/product-info"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { FiChevronRight, FiMinus, FiPlus } from "react-icons/fi"
 import {
   FacebookIcon,
@@ -24,12 +24,12 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share"
-import ImageGallery from "../components/image-gallary"
-import MobileActions from "../components/mobile-actions"
-import Card from "../components/slug-card/Card"
+import ImageGallery from "@modules/products/components/image-gallary"
+import MobileActions from "@modules/products/components/mobile-actions"
+import Card from "@modules/products/components/slug-card/Card"
 import getDisplayableprice from "@services/PriceService"
 import { useProductActions } from "@lib/context/product-context"
-import OptionSelect from "../components/option-select"
+import OptionSelect from "@modules/products/components/option-select"
 
 type ProductTemplateProps = {
   product: Product
@@ -39,6 +39,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
   const router = useRouter()
   const [displayableImage, setDisplayableImage] = useState(product.images[0])
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
+  const [selectedVariantId, setSelectedVariantId] = useState(null)
   const {
     updateOptions,
     addToCart,
@@ -51,6 +52,17 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
   } = useProductActions()
 
   console.log(selectedVariant)
+
+  useEffect(() => {
+    let selectedVarient
+    if (selectedVariantId) {
+      selectedVarient = product.variants.filter(
+        (variant) => variant.id === selectedVariantId
+      )
+      console.log(selectedVariantId,"selectedVarient", selectedVarient[0])
+      // setSelectedVariant()
+    }
+  }, [selectedVariantId])
 
   // const info = useRef<HTMLDivElement>(null)
 
@@ -214,6 +226,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                                 current={options[option.id]}
                                 updateOption={updateOptions}
                                 title={option.title}
+                                setSelectedVariantId={setSelectedVariantId}
                               />
                             </div>
                           )

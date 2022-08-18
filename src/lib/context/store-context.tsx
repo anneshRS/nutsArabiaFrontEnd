@@ -8,6 +8,7 @@ import {
   useUpdateLineItem,
 } from "medusa-react"
 import React, { useEffect, useState } from "react"
+import { notifyError, notifySuccess } from '@services/Toast';
 import { useCartDropdown } from "./cart-dropdown-context"
 
 interface VariantInfoProps {
@@ -231,11 +232,13 @@ export const StoreProvider = ({ children }: StoreProps) => {
       },
       {
         onSuccess: ({ cart }) => {
+          notifySuccess('Successfully Added to Cart')
           setCart(cart)
           storeCart(cart.id)
           timedOpen()
         },
         onError: (error) => {
+          notifyError('Insufficient Stock')
           handleError(error)
         },
       }
