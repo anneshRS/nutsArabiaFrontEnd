@@ -31,6 +31,8 @@ IProductCardProps) => {
   const [currentDisplayableVariant, setCurrentDisplayableVariant] =
     useState<any>({})
 
+  console.log("storePro", product)
+
   const fetchProduct = async (handle: string) => {
     return await medusaClient.products
       .list({ handle })

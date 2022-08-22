@@ -1,3 +1,5 @@
+import { StoreGetProductsParams } from "@medusajs/medusa"
+import { useCollections } from "medusa-react"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import React, { useContext, useState } from "react"
@@ -10,15 +12,15 @@ import { SidebarContext } from "../context/SidebarContext"
 
 export interface ICategoryCardProps {
   title: any
-  icon: any
+  // icon: any
   nested: any
 }
 const CategoryCard: React.FC<ICategoryCardProps> = ({
   title,
-  icon,
+  // icon,
   nested,
 }: ICategoryCardProps) => {
-  console.log("first", title, icon, nested)
+  // console.log("first", title, icon, nested)
 
   const [show, setShow] = useState(false)
   const showCategory = () => setShow(!show)
@@ -42,13 +44,7 @@ const CategoryCard: React.FC<ICategoryCardProps> = ({
         className="p-2 flex items-center rounded-md hover:bg-gray-50 w-full hover:text-emerald-600"
         role="button"
       >
-        <Image
-          src={icon}
-          width={18}
-          height={18}
-          alt={title}
-          aria-hidden="true"
-        />
+        <Image src={""} width={18} height={18} alt={title} aria-hidden="true" />
         <div className="inline-flex items-center justify-between ml-3 text-sm font-medium w-full hover:text-emerald-600">
           {title}
           <span className="transition duration-700 ease-in-out inline-flex loading-none items-end text-gray-400">

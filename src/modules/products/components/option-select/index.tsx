@@ -1,7 +1,7 @@
 import { onlyUnique } from "@lib/util/only-unique"
 import { ProductOption } from "@medusajs/medusa"
 import clsx from "clsx"
-import React from "react"
+import React, { useRef } from "react"
 
 type OptionSelectProps = {
   option: ProductOption
@@ -26,15 +26,23 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
     setSelectedVariantId(variantId)
   }
 
+  const optionRef = useRef<HTMLButtonElement>(null)
+
+  console.log(optionRef)
+
   React.useEffect(() => {
-    console.log("useEffect   current",current)
-    const filteredOptions = option.values
-      .map((v) => v /* .value */)
-      .filter(onlyUnique)
-    console.log("useEffect   filteredOptions",filteredOptions)
-    setVarient(filteredOptions[0].variant_id)
-    updateOption({ [option.id]: filteredOptions[0].value })
-  }, [current])
+    // console.log("useEffect   current", current)
+
+    // console.log("useEffect   filteredOptions", filteredOptions)
+
+    console.log("useref", optionRef.current?.id)
+    if (optionRef?.current?.id) {
+      const currentOption = document.getElementById(optionRef.current?.id)
+      setTimeout(() => {
+        currentOption?.click()
+      }, 1000)
+    }
+  }, [])
 
   return (
     <div className="flex flex-col gap-y-3">
@@ -47,11 +55,18 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
       {/* <div className="grid grid-cols-3 lg:grid-cols-6 gap-2"> */}
       <div className="flex">
         {
-          /* current &&  */ filteredOptions.map((v) => {
+          /* current &&  */ filteredOptions.map((v, i) => {
             console.log("--------->", v.value === current, v.value, current)
+
+            const itemProps =
+              i === 0 ? { ref: optionRef, id: "initSelection" } : {}
+
             return (
               <button
+                // ref={optionRef}
+                {...itemProps}
                 onClick={() => {
+                  console.log("check", v.value)
                   setVarient(v.variant_id)
                   updateOption({ [option.id]: v.value })
                   console.log("selectedOptions", option, {

@@ -12,6 +12,7 @@ import { SidebarContext } from "@modules/common/components/context/SidebarContex
 import Link from "next/link"
 import { useRouter } from "next/router"
 import CartItem from "../CartItem"
+import getDisplayableprice from "@services/PriceService"
 
 const CartTemplate = () => {
   const router = useRouter()
@@ -44,7 +45,9 @@ const CartTemplate = () => {
         Proceed To Checkout
       </span>
       <span className="rounded-lg font-bold font-serif py-2 px-3 bg-white text-emerald-600">
-        ${/* cartTotal.toFixed(2) */ ""}
+        {/* ${/* total.toFixed(2) */}
+        {cart.region.currency_code.toUpperCase()}{" "}
+        {getDisplayableprice(cart.total)}
       </span>
     </button>
   )
@@ -122,7 +125,7 @@ const CartTemplate = () => {
             </div>
           )}
 
-          {items.map((item, i) => (
+          {items?.map((item, i) => (
             <CartItem key={i + 1} item={item} cart={cart} />
           ))}
         </div>

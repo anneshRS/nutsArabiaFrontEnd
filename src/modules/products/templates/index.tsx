@@ -54,13 +54,17 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
   console.log(selectedVariant)
 
   useEffect(() => {
+    console.log("options", options)
+
+    setDisplayableImage(product.images[0])
+
     let selectedVarient
     if (selectedVariantId) {
       selectedVarient = product.variants.filter(
         (variant) => variant.id === selectedVariantId
       )
-      console.log(selectedVariantId,"selectedVarient", selectedVarient[0])
-      // setSelectedVariant()
+      console.log(selectedVariantId, "selectedVarient", selectedVarient)
+      setSelectedVariant(selectedVarient[0])
     }
   }, [selectedVariantId])
 
@@ -69,6 +73,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
   // const inView = useIntersection(info, "0px")
 
   console.log("roduct", product)
+
   return (
     // <ProductProvider product={product}>
     //   <div className="content-container flex flex-col small:flex-row small:items-start py-6 relative">
@@ -184,7 +189,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                     )}`}
                   />
                   <div className="mb-4 md:mb-5 block">
-                    <Stock product={product} />
+                    <Stock product={selectedVariant} />
                   </div>
                   <div>
                     <p className="text-sm leading-6 text-gray-500 md:leading-7">

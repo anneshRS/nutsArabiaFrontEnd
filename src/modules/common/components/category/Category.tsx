@@ -1,7 +1,7 @@
 import { fetchProductsList } from "@lib/data"
 import usePreviews from "@lib/hooks/use-previews"
 import { StoreGetProductsParams } from "@medusajs/medusa"
-import { useCart } from "medusa-react"
+import { useCart, useCollections } from "medusa-react"
 import Image from "next/image"
 import Link from "next/link"
 import React, { useContext, useMemo, useState } from "react"
@@ -37,16 +37,25 @@ const Category = () => {
     }
   }, [cart?.id, params])
 
-  const { data, hasNextPage, fetchNextPage, isLoading, isFetchingNextPage } =
-    useInfiniteQuery(
-      [`infinite-products-store`, queryParams, cart],
-      ({ pageParam }) => fetchProductsList({ pageParam, queryParams }),
-      {
-        getNextPageParam: (lastPage) => lastPage.nextPage,
-      }
-    )
-  const previews = usePreviews({ pages: data?.pages, region: cart?.region })
-  console.log("all", previews)
+  const {
+    data,
+    hasNextPage,
+    fetchNextPage,
+    /*  isLoading, */ isFetchingNextPage,
+  } = useInfiniteQuery(
+    [`infinite-products-store`, queryParams, cart],
+    ({ pageParam }) => fetchProductsList({ pageParam, queryParams }),
+    {
+      getNextPageParam: (lastPage) => lastPage.nextPage,
+    }
+  )
+  // const previews = usePreviews({ pages: data?.pages, region: cart?.region })
+
+  const { collections, isLoading } = useCollections()
+
+  console.log("parents", collections)
+
+  // console.log("all", previews)
 
   return (
     <div className="flex flex-col w-full h-full bg-white cursor-pointer scrollbar-hide">
@@ -82,12 +91,13 @@ const Category = () => {
           <Loading loading={loading} />
         ) : ( */}
         <div className="relative grid gap-2 p-6">
-          {previews?.map((category) => (
+          {collections?.map((data) => (
             <CategoryCard
-              key={category.id}
-              title={category.title}
-              icon={category.thumbnail}
-              nested={/* category.children */ ["fill this later"]}
+              key={data.id}
+              title={data.title}
+              // icon={category.thumbnail}
+              // nested={category.children }
+              nested={["fill this later"]}
             />
           ))}
         </div>

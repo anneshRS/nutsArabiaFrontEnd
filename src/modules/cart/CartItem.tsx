@@ -23,6 +23,7 @@ const CartItem: React.FC<ICartItemProps> = ({ item, cart }) => {
   const { closeCartDrawer } = useContext(SidebarContext)
   // const { handleIncreaseQuantity } = useAddToCart()
   const { deleteItem } = useStore()
+  console.log("handleI", cart)
 
   return (
     <div className="group w-full h-auto flex justify-start items-center bg-white py-3 px-4 border-b hover:bg-gray-50 transition-all border-gray-100 relative last:border-b-0">
@@ -36,7 +37,7 @@ const CartItem: React.FC<ICartItemProps> = ({ item, cart }) => {
         />
       </div>
       <div className="flex flex-col w-full overflow-hidden">
-        <Link href={`/product/${item.slug}`}>
+        <Link href={`/products/${item.variant.product.handle} `} passHref>
           <a
             onClick={closeCartDrawer}
             className="truncate text-sm font-medium text-gray-700 text-heading line-clamp-1"
