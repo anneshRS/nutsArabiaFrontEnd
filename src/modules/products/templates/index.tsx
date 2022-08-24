@@ -298,7 +298,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                         <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-emerald-500  mr-2 transition ease-in-out duration-500">
                           <FacebookShareButton
                             url={`https://supermarket-plum.vercel.app/product/${router.query.slug}`}
-                            quote="KachaBazar"
+                            // quote="KachaBazar"
                           >
                             <FacebookIcon size={32} round />
                           </FacebookShareButton>
@@ -306,7 +306,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                         <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-emerald-500  mr-2 transition ease-in-out duration-500">
                           <TwitterShareButton
                             url={`https://supermarket-plum.vercel.app/product/${router.query.slug}`}
-                            quote="KachaBazar"
+                            // quote="KachaBazar"
                           >
                             <TwitterIcon size={32} round />
                           </TwitterShareButton>
@@ -314,7 +314,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                         <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-emerald-500  mr-2 transition ease-in-out duration-500">
                           <RedditShareButton
                             url={`https://supermarket-plum.vercel.app/product/${router.query.slug}`}
-                            quote="KachaBazar"
+                            // quote="KachaBazar"
                           >
                             <RedditIcon size={32} round />
                           </RedditShareButton>
@@ -322,7 +322,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                         <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-emerald-500  mr-2 transition ease-in-out duration-500">
                           <WhatsappShareButton
                             url={`https://supermarket-plum.vercel.app/product/${router.query.slug}`}
-                            quote="KachaBazar"
+                            // quote="KachaBazar"
                           >
                             <WhatsappIcon size={32} round />
                           </WhatsappShareButton>
@@ -330,7 +330,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
                         <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-emerald-500  mr-2 transition ease-in-out duration-500">
                           <LinkedinShareButton
                             url={`https://supermarket-plum.vercel.app/product/${router.query.slug}`}
-                            quote="KachaBazar"
+                            // quote="KachaBazar"
                           >
                             <LinkedinIcon size={32} round />
                           </LinkedinShareButton>
