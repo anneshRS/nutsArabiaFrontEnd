@@ -6,7 +6,7 @@ import Stock from "../stock/Stock"
 import MainModal from "./MainModal"
 import { FiPlus, FiMinus } from "react-icons/fi"
 import Tags from "../tags/tags"
-import useAddToCart from "hooks/useAddToCart"
+// import useAddToCart from "hooks/useAddToCart"
 import {
   ProductProvider,
   useProductActions,
