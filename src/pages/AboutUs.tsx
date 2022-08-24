@@ -59,23 +59,23 @@ const AboutUs: NextPageWithLayout = () => {
               </h3>
               <div className="mt-3 text-base opacity-90 leading-7">
                 <p>
-                  Holisticly seize parallel metrics and functional ROI.
+                  {`Holisticly seize parallel metrics and functional ROI.
                   Seamlessly revolutionize error-free internal or "organic"
                   sources before effective scenarios. Progressively incentivize
                   state of the art applications for efficient intellectual
                   capital. Credibly leverage existing distinctive mindshare
                   through cutting-edge schemas. Proactively procrastinate team
                   building paradigms coordinate client-centric total transparent
-                  internal.
+                  internal.`}
                 </p>
 
                 <p>
-                  Dynamically embrace diverse customer service and installed
+                 {` Dynamically embrace diverse customer service and installed
                   base paradigms. Credibly seize enterprise-wide experiences for
                   end-to-end data. Professionally brand flexible alignments and
                   cost effective architectures. Enthusiastically incentivize
                   seamless communities with seamlessly facilitate revolutionary
-                  metrics with strategic theme areas.
+                  metrics with strategic theme areas.`}
                 </p>
               </div>
               <div className="grid md:grid-cols-2 gap-6 lg:grid-cols-2 xl:gap-6 mt-8">
@@ -109,7 +109,7 @@ const AboutUs: NextPageWithLayout = () => {
           </div>
           <div className="mt-10 lg:mt-16 text-base opacity-90 leading-7">
             <p>
-              Holisticly seize parallel metrics and functional ROI. Seamlessly
+              {`Holisticly seize parallel metrics and functional ROI. Seamlessly
               revolutionize error-free internal or "organic" sources before
               effective scenarios. Progressively incentivize state of the art
               applications for efficient intellectual capital. Credibly leverage
@@ -122,12 +122,12 @@ const AboutUs: NextPageWithLayout = () => {
               functionalities. Credibly utilize proactive ideas whereas
               cross-media core competencies. Uniquely maximize professional best
               practices through resource maximizing services. Conveniently
-              architect cross-unit web services for e-business imperatives.{" "}
+              architect cross-unit web services for e-business imperatives.`}{" "}
             </p>
 
             <p>
               {" "}
-              Appropriately visualize market-driven data before one-to-one
+              {`Appropriately visualize market-driven data before one-to-one
               scenarios. Collaboratively productize multifunctional ROI through
               intuitive supply chains. Enthusiastically seize revolutionary
               value and process-centric services. Competently harness intuitive
@@ -138,7 +138,7 @@ const AboutUs: NextPageWithLayout = () => {
               end-to-end data. Professionally brand flexible alignments and cost
               effective architectures. Enthusiastically incentivize seamless
               communities with seamlessly facilitate revolutionary metrics with
-              strategic theme areas.
+              strategic theme areas.`}
             </p>
           </div>
           <div className="mt-10 lg:mt-12 flex flex-col sm:grid gap-4">
@@ -160,9 +160,9 @@ const AboutUs: NextPageWithLayout = () => {
                   Our Founder
                 </h3>
                 <p className="mt-2 md:mt-3 font-normal block text-base">
-                  We’re impartial and independent, and every day we create
+                  {`We’re impartial and independent, and every day we create
                   distinctive, world-class reintermediate backend supply
-                  programmes.
+                  programmes.`}
                 </p>
               </div>
             </div>
