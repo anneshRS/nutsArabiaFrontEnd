@@ -6,7 +6,7 @@ type OrderSummaryProps = {
 }
 
 const OrderSummary = ({ order }: OrderSummaryProps) => {
-  const getAmount = (amount: number) => {
+  const getAmount = (amount: any) => {
     return formatAmount({ amount, region: order.region, includeTaxes: false })
   }
 
