@@ -8,6 +8,7 @@ import React, {
   useMemo,
   useState,
 } from "react"
+import { Variant } from "types/medusa"
 // import { useCart } from 'react-use-cart';
 
 // import { notifyError, notifySuccess } from '@utils/toast';
