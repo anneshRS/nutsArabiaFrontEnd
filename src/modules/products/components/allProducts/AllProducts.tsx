@@ -39,7 +39,7 @@ const AllProducts = () => {
             </h2>
           </div>
           <div className="flex justify-between items-center text-heading text-sm sm:text-base space-s-2 md:text-base lg:text-xl">
-            <Price product={/* product */} card={true} />
+            <Price /* product={product}  */card={true} />
             <button
               //   onClick={() => handleAddItem(product)}
               disabled={/* product.quantity */ 12 < 1}
