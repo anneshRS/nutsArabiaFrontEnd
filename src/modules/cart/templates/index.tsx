@@ -138,7 +138,7 @@ const CartTemplate = () => {
               <span>
                 {
                   /* !userInfo */ true ? (
-                    <div onClick={handleOpenLogin}>{checkoutClass}</div>
+                    <div /* onClick={handleOpenLogin} */>{checkoutClass}</div>
                   ) : (
                     <Link href="/checkout">
                       <a>{checkoutClass}</a>
