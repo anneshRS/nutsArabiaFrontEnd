@@ -1,7 +1,7 @@
 import React from "react"
 import ScaleLoader from "react-spinners/ScaleLoader"
 
-const Loading = ({ loading }) => {
+const Loading = ({ loading }:any) => {
   return (
     <div className="text-lg text-center py-6">
       <ScaleLoader
