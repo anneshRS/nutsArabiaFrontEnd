@@ -32,7 +32,7 @@ const Layout: React.FC<IProductCardProps> = ({ title, description, children }: I
               : "KachaBazar - React Grocery & Organic Food Store e-commerce Template"}
           </title>
           {description && <meta name="description" content={description} />}
-          <link ref="icon" href="/favicon.png" />
+          <link rel="icon" href="/favicon.png" />
         </Head>
         <NavBarTop />
         <NavBar />

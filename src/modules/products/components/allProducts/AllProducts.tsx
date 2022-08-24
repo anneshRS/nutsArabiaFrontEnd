@@ -1,6 +1,7 @@
 import Price from "@modules/common/components/price/Price"
 import Image from "next/image"
 import React, { useState } from "react"
+import { IoBagAddSharp } from "react-icons/io5"
 
 const AllProducts = () => {
   const [modalOpen, setModalOpen] = useState(false)

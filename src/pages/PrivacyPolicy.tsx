@@ -215,7 +215,7 @@ const PrivacyPolicy: NextPageWithLayout = () => {
           </div>
           <div className="mb-8 lg:mb-12 last:mb-0">
             <h2 className="text-xl xl:text-2xl xl:leading-7 font-semibold font-serif mb-2 lg:mb-4">
-              Children's Information
+              {`Children's Information`}
             </h2>
             <div className="font-sans leading-7">
               <p>
